@@ -48,8 +48,8 @@ for i in range(len(column)):
     for j in column[i]:
         if j != '':
             column[i] = j
-print(column)
-print(station_list_string)
+# print(column)
+# print(station_list_string)
 
 for j in range(len(station_list_string)):
     s = station_list_string[j].split('#')
@@ -60,7 +60,7 @@ for j in range(len(station_list_string)):
 
 # print(station_list_string)
 for j in range(len(station_list_string)):
-    print(station_list_string[j])
+    # print(station_list_string[j])
     d = {}
     for col_name in column:
         t = []
@@ -70,7 +70,7 @@ for j in range(len(station_list_string)):
                 t.append(i)
         d[col_name] = t
     station_list_string[j] = d
-print(station_list_string)
+# print(station_list_string)
 station_list = []
 for i in station_list_string:
     station_list.append(Station(i))
@@ -86,11 +86,30 @@ for s in range(len(station_list)):
     station_list[s].setDestination(t)
     # print('nom' + station_list[i].getName())
 
-print("==============================")
-for s in station_list:
-    print(s.getName())
-    print(s)
-    print("destination")
-    print(s.getDestination())
+# print("==============================")
+# for s in station_list:
+    # print(s.getName())
+    # print(s)
+    # print("destination")
+    # print(s.getDestination())
 
-# print(station_list)
+matrice = {}
+for j in range(len(station_list)):
+    matrice_i = {}
+    for i in range(len(station_list)):
+        matrice_i[station_list[i].getName()]=None
+    matrice[station_list[j].getName()] = matrice_i
+# print(matrice)
+
+
+for j in range(len(station_list)):
+    for i in range(len(station_list)):
+        if station_list[j].getName() != station_list[i].getName():
+            # print('j : ' + station_list[j].getName())
+            # print('i : ' + station_list[i].getName())
+            if station_list[i] in station_list[j].getDestination():
+                k = station_list[j].getDestination().index(station_list[i])
+                # print(station_list[j].getDistance(k))
+                matrice[station_list[j].getName()][station_list[i].getName()] = station_list[j].getDistance(k)
+
+print(matrice)
