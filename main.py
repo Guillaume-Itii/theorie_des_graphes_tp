@@ -5,7 +5,7 @@ class Station:
         self._distance = args['distance']
         self._destination = None
 
-    def setDestination(self,d):
+    def setDestination(self, d):
         self._destination = d
 
     def getName(self):
@@ -88,16 +88,16 @@ for s in range(len(station_list)):
 
 # print("==============================")
 # for s in station_list:
-    # print(s.getName())
-    # print(s)
-    # print("destination")
-    # print(s.getDestination())
+# print(s.getName())
+# print(s)
+# print("destination")
+# print(s.getDestination())
 
 matrice = {}
 for j in range(len(station_list)):
     matrice_i = {}
     for i in range(len(station_list)):
-        matrice_i[station_list[i].getName()]=None
+        matrice_i[station_list[i].getName()] = None
     matrice[station_list[j].getName()] = matrice_i
 # print(matrice)
 
