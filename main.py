@@ -74,6 +74,7 @@ for j in range(len(station_list_string)):
 station_list = []
 for i in station_list_string:
     station_list.append(Station(i))
+print(station_list)
 
 for s in range(len(station_list)):
     # print('station : ' + station_list[s].getName())
@@ -86,12 +87,12 @@ for s in range(len(station_list)):
     station_list[s].setDestination(t)
     # print('nom' + station_list[i].getName())
 
-# print("==============================")
-# for s in station_list:
-# print(s.getName())
-# print(s)
-# print("destination")
-# print(s.getDestination())
+print("==============================")
+for s in station_list:
+    print(s.getName())
+    print(s)
+    print("destination")
+    print(s.getDestination())
 
 matrice = {}
 for j in range(len(station_list)):
