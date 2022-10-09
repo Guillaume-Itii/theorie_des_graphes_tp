@@ -1,0 +1,7 @@
+name;#;destination;#;distance;;;;
+station_a;#;station_b;station_c;#;3;2
+station_b;#;station_a;station_c;#;3;6
+station_c;#;station_b;station_d;#;6;5
+station_d;#;station_a;station_b;station_e;#;4;1;7
+station_e;#;station_a;#;14
+alann;#;#
