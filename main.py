@@ -73,6 +73,13 @@ class Station:
         return s
 
 
+class Ligne:
+
+    def __init__(self,args):
+        print("La ligne : " + args['name'] + " à était créer")
+        self._name = args['name']
+        self._stations = args['stations']
+
 def createMatrice(station_list):
     # Création de la matrice d'adjacense
     matrice = {}
@@ -111,7 +118,22 @@ def readStation():
     station_list_string = []
     for s in temp:
         s = s.replace('\n', '')
-        station_list_string.append(s)
+        if "#ligne#" in s:
+            ligne_start = temp.index(s+'\n')
+            break
+        else:
+            station_list_string.append(s)
+    # ajoute les lignes a la liste de ligne
+    ligne_list_string = {}
+    for l in temp[ligne_start+1:]:
+        l = l.replace('\n','')
+        l_name = l.split(';')[0]
+        temp = []
+        for t in l.split(';')[1:]:
+            if t != '' :
+                temp.append(t)
+        ligne_list_string[l_name] = temp
+    print(ligne_list_string)
 
     column_string = station_list_string[0]
     # Recup les noms de colonne
@@ -159,10 +181,13 @@ def readStation():
                     # print(j)
         station_list[s].setDestination(t)
         # print('nom' + station_list[i].getName())
-    return column, column_string, station_list
+    ligne_list = []
+    for l in ligne_list_string:
+        ligne_list.append(Ligne({'name':l,'stations':ligne_list_string[l]}))
+    return column, column_string, station_list,ligne_list
 
 
-column, column_string, station_list = readStation()
+column, column_string, station_list ,ligne_list = readStation()
 while True:
     print("Saisir commannde (help : affiche l'aide) : ")
     action = input('>> ')
@@ -225,20 +250,28 @@ while True:
                 if supprimer in s.getDestination():
                     s.removeStation(supprimer)
     elif action == "matrice":
-        print(createMatrice(station_list))
-    elif action == "help" or "?" :
+        matrice = createMatrice(station_list)
+        format_string = ""
+        for s in matrice :
+            format_string += "|" + s + "|"
+        print(format_string)
+        print(type(matrice))
+        print('%-15s' % ('I am legend'))
+
+    elif action == "help" or action == "?" :
         print("Commande dispo : ")
         print("-> afficher    : Affiche un résumer de toute les stations du réseau")
         print("-> nouvelle    : Permet de crée une nouvelle station vierge")
         print("-> ajouter     : Permet de crée un connexion unidirectionnel entre deux stations")
         print("-> supprimer   : Supprime une station ainsi que ses connections")
         print("-> deconnecter : Supprime une connection entre deux stations")
+        print("-> matrice     : Affiche la matrice d'adjacense")
         print("-> sauvegarder : Sauvegarde l'actuelle réseau")
 
     else:
         for s in station_list:
             if action == s.getName():
                 print(s.getName())
-                print(s.getDestination())
+                # print(s.getDestination())
                 print(s.getDestinationString())
                 print(s.getDistance())

@@ -1,7 +1,17 @@
 name;#;destination;#;distance;;;;
-station_a;#;station_b;station_c;#;3;2
-station_b;#;station_a;station_c;#;3;6
-station_c;#;station_b;station_d;#;6;5
-station_d;#;station_a;station_b;station_e;#;4;1;7
-station_e;#;station_a;#;14
-alann;#;#
+Etainhus;#;Gonfreville-l'Orcher;Montivillier Gare;#;15;13;;
+Gonfreville-l'Orcher;#;Etainhus;Le Havre Gare;Montivillier Hopital;#;3;6;5
+Le Havre Gare;#;Gonfreville-l'Orcher;Le Havre Plage;#;6;5;;
+Montivillier Gare;#;Montivillier Hopital;Gonfreville-l'Orcher;Etretat Granval;#;4;12;7
+Montivillier Hopital;#;Montivillier Hopital;Gonfreville-l'Orcher;#;5;8;;
+Etretat Granval;#;Montivillier Gare;#;12;;;;
+Etretat Gare;#;Octeville;#;2;;;;
+Octeville;#;Le Havre Plage;Montivillier Hopital;#;6;3;;
+Le Havre Plage;#;Octeville;Le Havre Gare;#;5;16;;
+#ligne#;;;;;;;;
+12;Etainhus;Gonfreville-l'Orcher;Le Havre Gare;;;;;
+11;Etainhus;Montivillier Gare;;;;;;
+22;Gonfreville-l'Orcher;Montivillier Hopital;Montivillier Gare;;;;;
+10;Gonfreville-l'Orcher;Montivillier Hopital;Montivillier Gare;Octeville;;;;
+21;Montivillier Gare;Etretat Granval;;;;;;
+13;Etretat Gare;Octeville;Le Havre Plage;Le Havre Gare;;;;
