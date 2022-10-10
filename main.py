@@ -80,6 +80,11 @@ class Ligne:
         self._name = args['name']
         self._stations = args['stations']
 
+    def getName(self):
+        return self._name
+    def getStations(self):
+        return self._stations
+
 def createMatrice(station_list):
     # Création de la matrice d'adjacense
     matrice = {}
@@ -183,7 +188,11 @@ def readStation():
         # print('nom' + station_list[i].getName())
     ligne_list = []
     for l in ligne_list_string:
-        ligne_list.append(Ligne({'name':l,'stations':ligne_list_string[l]}))
+        t = []
+        for s in station_list:
+            if s.getName() in ligne_list_string[l]:
+                t.append(s)
+        ligne_list.append(Ligne({'name':l,'stations':t}))
     return column, column_string, station_list,ligne_list
 
 
@@ -257,6 +266,12 @@ while True:
         print(format_string)
         print(type(matrice))
         print('%-15s' % ('I am legend'))
+    elif action == "ligne":
+        for l in ligne_list:
+            print(l.getName())
+            for s in l.getStations():
+                print('+->'+s.getName())
+            print("==========================")
 
     elif action == "help" or action == "?" :
         print("Commande dispo : ")
@@ -266,6 +281,7 @@ while True:
         print("-> supprimer   : Supprime une station ainsi que ses connections")
         print("-> deconnecter : Supprime une connection entre deux stations")
         print("-> matrice     : Affiche la matrice d'adjacense")
+        print("-> ligne       : Affiche les lignes de bus")
         print("-> sauvegarder : Sauvegarde l'actuelle réseau")
 
     else:
