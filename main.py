@@ -230,6 +230,7 @@ while True:
         depart.addStation(arrive, distance)
     elif action == "sauvegarder":
         saveStation(column_string, station_list)
+        print("Le réseau à bien était sauvegarder dans le CSV")
     elif action == "supprimer":
         nom = ''
         nom = input("Saisir un nom de station à supprimer : ")
