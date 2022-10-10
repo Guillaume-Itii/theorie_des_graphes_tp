@@ -1,89 +1,6 @@
-class Station:
-    def __init__(self, args):
-        print('Création de la station : ' + str(args))
-        self._name = args['name'][0]
-        self._destinationString = args['destination']
-        self._distance = args['distance']
-        self._destination = []
+import Ligne
+import Station
 
-    def setDestination(self, d):
-        self._destination = d
-
-    def getName(self):
-        return self._name
-
-    def getDestinationString(self, index=None):
-        if index is None:
-            return self._destinationString
-        else:
-            return self._destinationString[index]
-
-    def getDestination(self, index=None):
-        if self._destination is None:
-            print('No route set yet')
-            return False
-        if index is None:
-            return self._destination
-        else:
-            return self._destination[index]
-
-    def getDistance(self, index=None):
-        if index is None:
-            return self._distance
-        else:
-            return self._distance[index]
-
-    def addStation(self, s, d):
-        print("La station : " + s.getName() + " à était ajouter à : " + self._name + " avec une distance de " + str(d))
-        # print(self)
-        # print(s)
-        self._destination.append(s)
-        self._destinationString.append(s.getName())
-        self._distance.append(str(d))
-
-    def removeStation(self,s):
-        print(s.getName() + " à était supprimer de : " + self._name)
-        self._distance.pop(self._destination.index(s))
-        self._destination.remove(s)
-
-    def formatToString(self):
-        s = self._name + ";#;"
-        for i in self._destination:
-            s += i.getName() + ';'
-        s += '#;'
-        for i in self._distance:
-            s += i + ';'
-        s = s[:-1]
-
-        return s
-
-    def showStation(self):
-        temp = []
-        temp.append("Station : " + self._name + "\n")
-        temp.append("Destination : \n")
-        for i in range(len(self._destination)):
-            temp.append('   ' + self._destination[i].getName() + " : " + self._distance[i] + '\n')
-        s = ''
-        for i in range(len(temp[-1])):
-            s += '='
-        temp.append(s)
-        s = ""
-        for i in temp:
-            s += i
-        return s
-
-
-class Ligne:
-
-    def __init__(self,args):
-        print("La ligne : " + args['name'] + " à était créer")
-        self._name = args['name']
-        self._stations = args['stations']
-
-    def getName(self):
-        return self._name
-    def getStations(self):
-        return self._stations
 
 def createMatrice(station_list):
     # Création de la matrice d'adjacense
@@ -173,7 +90,7 @@ def readStation():
     # print(station_list_string)
     station_list = []
     for i in station_list_string:
-        station_list.append(Station(i))
+        station_list.append(Station.Station(i))
     # print(station_list)
 
     for s in range(len(station_list)):
@@ -192,7 +109,7 @@ def readStation():
         for s in station_list:
             if s.getName() in ligne_list_string[l]:
                 t.append(s)
-        ligne_list.append(Ligne({'name':l,'stations':t}))
+        ligne_list.append(Ligne.Ligne({'name':l,'stations':t}))
     return column, column_string, station_list,ligne_list
 
 
@@ -210,7 +127,7 @@ while True:
         nom = input("Saisir un nom : ")
         while nom == '' or nom in station_name_list:
             nom = input("Saisir un nom valide : ")
-        station_list.append(Station({'name': [nom], 'destination': [], 'distance': []}))
+        station_list.append(Station.Station({'name': [nom], 'destination': [], 'distance': []}))
     elif action == "ajouter":
         nom_arrive, nom_depart, distance = '', '', 0
         nom_depart = input("Saisir un nom de depart: ")
