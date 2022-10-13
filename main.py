@@ -178,12 +178,13 @@ while True:
                     s.removeStation(supprimer)
     elif action == "matrice":
         matrice = createMatrice(station_list)
-        format_string = ""
-        for s in matrice :
-            format_string += "|" + s + "|"
-        print(format_string)
-        print(type(matrice))
-        print('%-15s' % ('I am legend'))
+        print(matrice)
+        # format_string = ""
+        # for s in matrice :
+        #     format_string += "|" + s + "|"
+        # print(format_string)
+        # print(type(matrice))
+        # print('%-15s' % ('I am legend'))
     elif action == "ligne":
         for l in ligne_list:
             print(l.getName())
