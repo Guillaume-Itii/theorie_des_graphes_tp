@@ -1,6 +1,7 @@
 import Ligne
 import Station
-
+from matplotlib import  pyplot as plt
+import random
 
 def createMatrice(station_list):
     # Création de la matrice d'adjacense
@@ -112,6 +113,37 @@ def readStation():
         ligne_list.append(Ligne.Ligne({'name':l,'stations':t}))
     return column, column_string, station_list,ligne_list
 
+def printGraph(matrice_dict):
+    x = 0
+    matrice_num = []
+    for j in range(len(matrice_dict)):
+        temp = []
+        for i in range(len(matrice_dict)):
+            temp.append(None)
+        matrice_num.append(temp)
+    for j in matrice_dict:
+        y = 0
+        for i in matrice_dict[j]:
+            # print(matrice_dict[j][i])
+            if matrice_dict[j][i] is not None:
+                matrice_num[x][y] = int(matrice_dict[j][i])
+            else :
+                matrice_num[x][y] = matrice_dict[j][i]
+            y += 1
+        x += 1
+    # print(matrice_dict)
+    # print(matrice_num)
+    matrice_placement = []
+    for j in range(len(matrice_num)):
+        matrice_placement.append([random.randint(0,len(matrice_num)),random.randint(0,len(matrice_num))])
+    label = []
+    for i in matrice_dict:
+        label.append(i)
+    print(matrice_placement)
+    for i in matrice_placement:
+        plt.plot(i[0],i[1],marker="o",markerfacecolor="green")
+        plt.text(i[0],i[1],label[matrice_placement.index(i)])
+    plt.show()
 
 column, column_string, station_list ,ligne_list = readStation()
 while True:
@@ -191,6 +223,8 @@ while True:
             for s in l.getStations():
                 print('+->'+s.getName())
             print("==========================")
+    elif action == "graph":
+        printGraph(createMatrice(station_list))
 
     elif action == "help" or action == "?" :
         print("Commande dispo : ")
