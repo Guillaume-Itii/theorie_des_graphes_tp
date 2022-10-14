@@ -113,6 +113,7 @@ def readStation():
         ligne_list.append(Ligne.Ligne({'name':l,'stations':t}))
     return column, column_string, station_list,ligne_list
 
+
 def printGraph(matrice_dict):
     x = 0
     matrice_num = []
@@ -144,6 +145,12 @@ def printGraph(matrice_dict):
         plt.plot(i[0],i[1],marker="o",markerfacecolor="green")
         plt.text(i[0],i[1],label[matrice_placement.index(i)])
     plt.show()
+
+
+def journey(matrice,depart,arrive):
+    for j in matrice :
+        for i in matrice[j]:
+            print(matrice[j][i])
 
 column, column_string, station_list ,ligne_list = readStation()
 while True:
@@ -223,6 +230,15 @@ while True:
             for s in l.getStations():
                 print('+->'+s.getName())
             print("==========================")
+    elif action == "chemin":
+        depart, arrive = '', ''
+        depart = input("Saisir un nom de station de depart : ")
+        while depart == '' or depart not in station_name_list:
+            depart = input("Saisir un nom de station de depart  : ")
+        arrive = input("Saisir un nom de station d'arriver : ")
+        while arrive == '' or arrive not in station_name_list:
+            arrive = input("Saisir un nom de station d'arriver : ")
+        journey(createMatrice(station_list), depart, arrive)
     elif action == "graph":
         printGraph(createMatrice(station_list))
 
@@ -235,6 +251,7 @@ while True:
         print("-> deconnecter : Supprime une connection entre deux stations")
         print("-> matrice     : Affiche la matrice d'adjacense")
         print("-> ligne       : Affiche les lignes de bus")
+        print("-> chemin      : Donne le chemin entre deux points donner")
         print("-> sauvegarder : Sauvegarde l'actuelle réseau")
 
     else:
